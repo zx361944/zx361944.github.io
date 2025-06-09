@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박진석 - 클라우드 개발자 포트폴리오</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 60px; /* Prevent content being hidden under navbar */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #1e3a8a;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+        .navbar-logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+        }
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
+            color: #16a34a;
+        }
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 10px;
+            }
+            .navbar-menu {
+                gap: 15px;
+            }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 60px 0;
+            background: white;
+            margin-bottom: 20px;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            color: #1e3a8a;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #16a34a;
+            margin: 10px auto;
+        }
+
+        /* About Me */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .strengths {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .strength-item {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 4px solid #16a34a;
+        }
+
+        .strength-item h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Experience */
+        .experience-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #16a34a;
+        }
+
+        .experience-item h3 {
+            color: #1e3a8a;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .experience-date {
+            color: #16a34a;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .experience-item p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Projects */
+        .project-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .project-item h3 {
+            color: #1e3a8a;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: #16a34a;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .skill-category h3 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-list li::before {
+            content: '▶';
+            color: #16a34a;
+            margin-right: 10px;
+        }
+
+        /* Education */
+        .education-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .education-item h3 {
+            color: #1e3a8a;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .education-period {
+            color: #16a34a;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Contact */
+        .contact-content {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-content h3 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .email-link {
+            color: #16a34a;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: 2px solid #16a34a;
+            padding: 12px 30px;
+            border-radius: 25px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            background: #16a34a;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .strengths {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-logo">박진석</div>
+            <div class="navbar-menu">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / 인사말 -->
+    <header class="header" id="home">
+        <div class="container">
+            <h1>박진석</h1>
+            <p>해야할 일을 꾸준히 하는 성실한 사람</p>
+        </div>
+    </header>
+
+    <!-- About Me -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>축산학과를 전공했지만, 새로운 도전을 위해 클라우드 개발자의 길을 걷고 있습니다.<br>
+                해야 할 일을 꾸준히 해나가는 성실함으로 목표를 향해 나아가고 있습니다.</p>
+                
+                <div class="strengths">
+                    <div class="strength-item">
+                        <h3>성실함</h3>
+                        <p>꾸준한 학습과 지속적인 노력으로 목표를 달성합니다</p>
+                    </div>
+                    <div class="strength-item">
+                        <h3>책임감</h3>
+                        <p>맡은 일에 대한 강한 책임감으로 끝까지 완수합니다</p>
+                    </div>
+                    <div class="strength-item">
+                        <h3>꼼꼼함</h3>
+                        <p>세심한 주의력으로 완성도 높은 결과물을 만듭니다</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-item">
+                <h3>클라우드 캠프</h3>
+                <div class="experience-date">2025.05 ~ 현재 진행 중</div>
+                <p>클라우드 개발자 양성 과정에 참여하여 체계적인 학습을 진행하고 있습니다. 
+                기초적인 프로그래밍부터 클라우드 기술까지 단계별로 학습하며, 
+                실무 프로젝트를 통해 실전 경험을 쌓고 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-item">
+                <h3>전기차 & 수소차 데이터 분석 및 차량 추천 시스템</h3>
+                <p><strong>팀 프로젝트</strong></p>
+                <p>전기차와 수소차의 충전소 데이터 및 정부 지원금 정보를 수집하고 분석하여, 
+                사용자에게 최적의 차량을 추천해주는 시스템을 개발했습니다. 
+                데이터 크롤링부터 전처리, 시각화까지 전 과정에 참여했습니다.</p>
+                
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">데이터 크롤링</span>
+                    <span class="tech-tag">데이터 전처리</span>
+                    <span class="tech-tag">데이터 시각화</span>
+                    <span class="tech-tag">팀 협업</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>프로그래밍</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>HTML</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>데이터 처리</h3>
+                    <ul class="skill-list">
+                        <li>데이터 크롤링</li>
+                        <li>데이터 전처리</li>
+                        <li>데이터 시각화</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>시스템 & 클라우드</h3>
+                    <ul class="skill-list">
+                        <li>Linux (기초)</li>
+                        <li>클라우드 (학습 중)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section" id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>축산학과 전공</h3>
+                <div class="education-period">대학교 재학/졸업</div>
+                <p>축산학 전공을 통해 체계적인 학습 능력과 문제 해결 능력을 기르며, 
+                새로운 분야에 도전하는 용기를 키웠습니다.</p>
+            </div>
+            <div class="education-item">
+                <h3>클라우드 개발자 양성 과정</h3>
+                <div class="education-period">2025.05 ~ 현재</div>
+                <p>클라우드 캠프를 통해 프로그래밍 기초부터 클라우드 기술까지 
+                체계적으로 학습하고 있으며, 실무 프로젝트 경험을 쌓고 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <h3>연락을 기다립니다</h3>
+                <p>새로운 기회와 도전을 통해 함께 성장하고 싶습니다.</p>
+                <br>
+                <a href="mailto:zx361944@gmail.com" class="email-link">zx361944@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 박진석. 클라우드 개발자를 꿈꾸며.</p>
+        </div>
+    </footer>
+    <script>
+        // Optional: Highlight active menu item on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-menu a');
+        window.addEventListener('scroll', () => {
+            let fromTop = window.scrollY + 65;
+            sections.forEach(section => {
+                if (
+                    section.offsetTop <= fromTop &&
+                    section.offsetTop + section.offsetHeight > fromTop
+                ) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + section.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
